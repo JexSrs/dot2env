@@ -50,9 +50,12 @@ export function load(opts?: Partial<Options>) {
     opts.override ??= false;
     opts.encoding ??= 'utf-8';
 
-    const filepath = path.resolve(process.cwd(), opts.envMap[opts.env?.toLowerCase() ?? ''] ?? '.env');
-    let filedata = fs.readFileSync(filepath, opts.encoding);
-    let parsed: any = parse(filedata);
+    let filepath = path.resolve(process.cwd(), opts.envMap[opts.env?.toLowerCase() ?? ''] ?? '.env');
+    if(!fs.existsSync(filepath))
+        filepath = path.resolve(process.cwd(), '.env');
+
+    const filedata = fs.readFileSync(filepath, opts.encoding);
+    const parsed: any = parse(filedata);
 
     Object.keys(parsed).forEach(key => {
         if (process.env[key] === undefined || opts!.override)
