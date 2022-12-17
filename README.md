@@ -12,7 +12,7 @@ npm install dot2env
 
 ## Usage
 
-## Simple
+### Simple
 
 Create a `.env` file in the root of your project:
 ```
@@ -22,13 +22,13 @@ password="secret"
 
 As early as possible in your application, import and configure dot2env:
 ```typescript
-import "dot2env";
+import "@jexsrs/dot2env";
 
 console.log(process.env.USERNAME);
 console.log(process.env.PASSWORD);
 ```
 
-## Environments
+### Environments
 The supported environments are:
 * `production`, `prod`
 * `staging`, `stage`
@@ -48,18 +48,18 @@ will import only the `.env.production` file.
  
 If the `.env.[environment]` file is not found, it will always fallback to the `.env` file.
 
-## Override default variables
+### Override default variables
 If you want to override existing environment variables, use the `override` option.
 ```typescript
-import {load} from "dot2env";
+import {load} from "@jexsrs/dot2env";
 
 load({override: true});
 ```
 
-## Custom mapping
+### Custom mapping
 In case you want to add more environments or use custom ones you can define your own mapping:
 ```typescript
-import {load} from "dot2env";
+import {load} from "@jexsrs/dot2env";
 
 load({
     envMap: {
@@ -69,5 +69,5 @@ load({
         production: '.env.production',
         'custom-env': '.env.custom-environment'
     }
-})
+});
 ```
